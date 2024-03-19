@@ -23,10 +23,10 @@ app.post("/login", async (req, res) => {
     if (user) {
       res.send(user);
     } else {
-      res.send("please check your credentials");
+      res.send({ result: "user not found" });
     }
   } else {
-    res.send("pleas check your credentials");
+    res.send({ result: "no user found" });
   }
 });
 app.listen(5000);
