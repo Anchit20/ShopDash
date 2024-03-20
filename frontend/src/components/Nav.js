@@ -10,51 +10,42 @@ const Nav = () => {
   };
   return (
     <div>
-      <ul className="nav-ul">
-        <li>
-          <Link to="/">Products</Link>
-        </li>
-        <li>
-          <Link to="/add">Add Products</Link>
-        </li>
-        <li>
-          <Link to="/update">Update Products</Link>
-        </li>
-        <li>
-          <Link to="/profile">Profile</Link>
-        </li>
-
-        {/* <li>
-          {auth ? (
+      <img
+        className="logo"
+        src="https://i.pinimg.com/564x/0d/14/e2/0d14e2b57c273d97cb0e9ead94334979.jpg"
+        alt="logo"
+      />
+      {auth ? (
+        <ul className="nav-ul">
+          <li>
+            <Link to="/">Products</Link>
+          </li>
+          <li>
+            <Link to="/add">Add Products</Link>
+          </li>
+          <li>
+            <Link to="/update">Update Products</Link>
+          </li>
+          <li>
+            <Link to="/profile">Profile</Link>
+          </li>
+          <li>
             <Link onClick={logout} to="/signup">
-              Logout
+              Logout ({JSON.parse(auth).name})
             </Link>
-          ) : (
+          </li>
+        </ul>
+      ) : (
+        <ul className="nav-ul nav-right">
+          <li>
             <Link to="/signup">Register</Link>
-          )}
-        </li>
-        <li>
-          <Link to="/login">Login</Link>
-        </li> */}
-        {auth ? (
+          </li>
           <li>
             {" "}
-            <Link onClick={logout} to="/signup">
-              Logout
-            </Link>{" "}
+            <Link to="/login">Login</Link>{" "}
           </li>
-        ) : (
-          <>
-            <li>
-              <Link to="/signup">Register</Link>
-            </li>
-            <li>
-              {" "}
-              <Link to="/login">Login</Link>{" "}
-            </li>
-          </>
-        )}
-      </ul>
+        </ul>
+      )}
     </div>
   );
 };
