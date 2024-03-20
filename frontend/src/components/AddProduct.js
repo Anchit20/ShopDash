@@ -6,10 +6,28 @@ const AddProduct = () => {
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
   const [brand, setBrand] = useState("");
+  const [error, setError] = useState(false);
 
-  const handleAdd = () => {
+  const handleAdd = async () => {
+    if (!name || !price || !category || !brand) {
+      //   setError(true);
+      alert("please enter valid details");
+      return false;
+    }
+
     console.log(name, price, category, brand);
+    const userID = JSON.parse(localStorage.getItem("user"))._id;
+    let result = await fetch("http://localhost:5000/add", {
+      method: "POST",
+      body: JSON.stringify({ name, price, category, brand, userID }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    result = await result.json();
+    console.log(result);
   };
+
   return (
     <div className="addProduct">
       <h1 className="addTitle">Add Product</h1>
@@ -22,6 +40,10 @@ const AddProduct = () => {
           setName(e.target.value);
         }}
       />
+      {/* {error && !name && (
+        <span className="errorMessage">enter a valid name</span>
+      )} */}
+
       <input
         className="input-field form-group"
         value={price}
@@ -31,6 +53,9 @@ const AddProduct = () => {
           setPrice(e.target.value);
         }}
       />
+      {/* {error && !price && (
+        <span className="errorMessage">enter a valid price</span>
+      )} */}
       <input
         className="input-field form-group"
         value={category}
@@ -40,6 +65,9 @@ const AddProduct = () => {
           setCategory(e.target.value);
         }}
       />
+      {/* {error && !category && (
+        <span className="errorMessage">enter a valid category</span>
+      )} */}
       <input
         className="input-field form-group"
         value={brand}
@@ -49,6 +77,9 @@ const AddProduct = () => {
           setBrand(e.target.value);
         }}
       />
+      {/* {error && !brand && (
+        <span className="errorMessage">enter a valid brand</span>
+      )} */}
       <button className="addButton" onClick={handleAdd}>
         Add
       </button>
