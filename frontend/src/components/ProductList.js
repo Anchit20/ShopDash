@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
   const handleDelete = async (id) => {
     let result = await fetch(`http://localhost:5000/product/${id}`, {
@@ -13,9 +15,14 @@ const ProductList = () => {
     }
   };
 
+  const handleUpdate = (id) => {
+    navigate(`/update/${id}`);
+  };
+
   useEffect(() => {
     getProducts();
   }, []);
+
   const getProducts = async () => {
     let result = await fetch("http://localhost:5000/products");
     result = await result.json();
@@ -40,6 +47,7 @@ const ProductList = () => {
           <li>{item.category}</li>
           <li>
             <button onClick={() => handleDelete(item._id)}>delete</button>
+            <button onClick={() => handleUpdate(item._id)}>update</button>
           </li>
         </ul>
       ))}

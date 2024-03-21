@@ -48,7 +48,22 @@ app.get("/products", async (req, res) => {
 
 app.delete("/product/:id", async (req, res) => {
   // res.send(req.params.id);
-  const result = await Product.deleteOne({ _id: req.params.id });
+  let result = await Product.deleteOne({ _id: req.params.id });
+  res.send(result);
+});
+
+app.get("/product/:id", async (req, res) => {
+  let result = await Product.findOne({ _id: req.params.id });
+  res.send(result);
+});
+
+app.put("/product/:id", async (req, res) => {
+  let result = await Product.updateOne(
+    { _id: req.params.id },
+    {
+      $set: req.body,
+    }
+  );
   res.send(result);
 });
 app.listen(5000);
