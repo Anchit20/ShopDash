@@ -23,9 +23,9 @@ const SignUp = () => {
       headers: { "Content-Type": "application/json" },
     });
     result = await result.json();
-    localStorage.setItem("user", JSON.stringify(result));
+    localStorage.setItem("user", JSON.stringify(result.result));
+    localStorage.setItem("token", JSON.stringify(result.auth));
     if (result) {
-      // window.location.reload();
       navigate("/");
     }
   };
